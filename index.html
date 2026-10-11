@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gülhane Kafe | Dijital Menü</title>
+<meta name="description" content="Gülhane Kafe ve Organizasyon Gaziantep dijital menüsü. Kahveler, içecekler, pastalar, kahvaltı ve hediye çikolatalar.">
+<meta name="theme-color" content="#08090c">
+<style>
+:root{
+  --bg:#08090c; --card:#12141a; --card2:#181b22;
+  --blue:#a9ddf5; --pink:#d9a6b3; --white:#f8fafc; --gray:#a1a1aa;
+  --border:rgba(255,255,255,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding-bottom:84px;line-height:1.4}
+a{color:inherit;text-decoration:none}
+
+/* HEADER */
+header{position:relative;text-align:center;padding:38px 18px 30px;overflow:hidden;border-bottom:1px solid var(--border);
+  background:radial-gradient(circle at 85% 0%,rgba(169,221,245,.18),transparent 40%),radial-gradient(circle at 10% 0%,rgba(217,166,179,.16),transparent 40%),#0d0f14}
+.logo-wrap{width:118px;height:118px;margin:0 auto 16px;border-radius:50%;padding:3px;background:linear-gradient(135deg,var(--blue),var(--pink));box-shadow:0 0 40px rgba(169,221,245,.22)}
+.logo,.logo-fallback{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#0d0f14;display:block}
+.logo-fallback{display:none;align-items:center;justify-content:center;font-size:44px;font-weight:700;color:var(--blue)}
+h1{font-size:30px;letter-spacing:2px;font-weight:800}
+.subtitle{color:var(--gray);margin-top:6px;font-size:14px}
+.tags{display:flex;justify-content:center;flex-wrap:wrap;gap:7px;margin-top:16px}
+.tags span{font-size:11.5px;padding:6px 12px;border-radius:30px;color:var(--pink);border:1px solid rgba(217,166,179,.35);background:rgba(217,166,179,.07)}
+.actions{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:20px}
+.action{padding:11px 16px;border:1px solid var(--border);border-radius:30px;background:rgba(255,255,255,.05);font-size:13px;font-weight:600;backdrop-filter:blur(8px);transition:.2s}
+.action:hover{border-color:var(--blue)}
+.action:active{transform:scale(.97)}
+
+/* STICKY NAV */
+.catnav{position:sticky;top:0;z-index:30;background:rgba(8,9,12,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.catnav-inner{max-width:1050px;margin:auto;display:flex;gap:8px;overflow-x:auto;padding:12px 15px;scrollbar-width:none}
+.catnav-inner::-webkit-scrollbar{display:none}
+.chip{flex:none;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:30px;border:1px solid var(--border);background:var(--card);color:var(--gray);font-size:13px;font-weight:600;white-space:nowrap;transition:.2s}
+.chip.active{color:#061016;background:linear-gradient(135deg,var(--blue),#c9ecfa);border-color:transparent}
+
+/* MAIN */
+.container{max-width:1050px;margin:auto;padding:20px 15px}
+.search{position:relative;margin-bottom:6px}
+.search input{width:100%;padding:14px 16px 14px 44px;border-radius:16px;border:1px solid var(--border);background:var(--card);color:var(--white);font-size:15px;outline:none;transition:.2s}
+.search input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(169,221,245,.12)}
+.search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--gray);fill:none;stroke-width:2}
+
+.menu-section{margin-top:42px;scroll-margin-top:72px}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.section-icon{width:46px;height:46px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:linear-gradient(145deg,rgba(169,221,245,.14),rgba(217,166,179,.10));border:1px solid var(--border);font-size:22px}
+.section-head h2{font-size:21px}
+.section-head p{color:var(--gray);font-size:12px;margin-top:2px}
+.note{color:var(--pink);font-size:12.5px;margin-top:12px;padding:10px 14px;border-radius:12px;background:rgba(217,166,179,.08);border:1px dashed rgba(217,166,179,.35)}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.product{overflow:hidden;border-radius:20px;background:var(--card);border:1px solid var(--border);display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.product:hover{transform:translateY(-3px);border-color:rgba(169,221,245,.4)}
+.media{position:relative;height:140px;background:var(--card2)}
+.media img{width:100%;height:100%;object-fit:cover;display:block}
+.media::after{content:"";position:absolute;inset:auto 0 0 0;height:50%;background:linear-gradient(to top,rgba(18,20,26,.9),transparent);pointer-events:none}
+.ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:44px;background:radial-gradient(circle at 30% 20%,rgba(169,221,245,.16),transparent 60%),radial-gradient(circle at 80% 90%,rgba(217,166,179,.16),transparent 60%),var(--card2)}
+.product-body{padding:12px 13px 14px;display:flex;flex-direction:column;flex:1;justify-content:space-between;gap:10px}
+.product-name{font-size:14px;font-weight:700;line-height:1.3}
+.price{align-self:flex-start;color:var(--blue);font-size:15px;font-weight:800;padding:5px 11px;border-radius:30px;background:rgba(169,221,245,.10);border:1px solid rgba(169,221,245,.22)}
+.empty{display:none;text-align:center;color:var(--gray);padding:50px 0}
+
+/* LOCATION */
+.location{margin-top:50px;padding:24px 18px;text-align:center;border:1px solid var(--border);border-radius:22px;background:linear-gradient(145deg,rgba(169,221,245,.07),rgba(217,166,179,.05)),var(--card)}
+.location h2{font-size:20px;margin-bottom:8px}
+.location p{color:var(--gray);font-size:13px;line-height:1.6}
+.maps{display:inline-block;margin-top:15px;padding:12px 18px;border-radius:12px;background:var(--blue);color:#061016;font-weight:700;font-size:13px}
+
+/* FLOATING */
+.whatsapp{position:fixed;right:17px;bottom:80px;width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;z-index:50;box-shadow:0 8px 25px rgba(0,0,0,.5)}
+.whatsapp svg{width:28px;height:28px;fill:#fff}
+#top{position:fixed;right:22px;bottom:146px;width:42px;height:42px;border:1px solid var(--border);border-radius:50%;background:var(--card2);color:#fff;display:none;z-index:50;font-size:18px;cursor:pointer}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:64px;padding-bottom:env(safe-area-inset-bottom,0px);display:flex;justify-content:space-around;align-items:center;background:rgba(8,9,12,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--border);z-index:40}
+.bottom-nav a{text-align:center;color:var(--gray);font-size:10px}
+.bottom-nav span{display:block;font-size:19px;margin-bottom:2px}
+
+footer{text-align:center;padding:30px 15px 10px;color:var(--gray);font-size:11px}
+footer strong{color:var(--pink)}
+
+@media(min-width:700px){
+  .products{grid-template-columns:repeat(3,1fr);gap:16px}
+  .media{height:180px}
+  .container{padding:28px 20px}
+}
+@media(min-width:1000px){.products{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:360px){.products{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header id="home">
+  <div class="logo-wrap">
+    <img src="logo.jpg" class="logo" alt="Gülhane Kafe Logo"
+      onerror="this.style.display='none';document.getElementById('fallback').style.display='flex';">
+    <div id="fallback" class="logo-fallback">G</div>
+  </div>
+  <h1>GÜLHANE</h1>
+  <p class="subtitle">Kafe ve Organizasyon • Gaziantep</p>
+  <div class="tags"><span>Özel Tasarım Çikolata</span><span>Organizasyon</span><span>Okey &amp; Oyun</span></div>
+  <div class="actions">
+    <a class="action" href="tel:05059219493">📞 Ara</a>
+    <a class="action" href="https://wa.me/905059219493" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a class="action" href="https://instagram.com/gulhanegaziantep" target="_blank" rel="noopener">📷 Instagram</a>
+  </div>
+</header>
+
+<nav class="catnav"><div class="catnav-inner" id="chips"></div></nav>
+
+<main class="container">
+  <div class="search">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Menüde ara… (latte, tiramisu, tost)" autocomplete="off">
+  </div>
+  <div id="menu"></div>
+  <div class="empty" id="empty">Aramanızla eşleşen ürün bulunamadı.</div>
+
+  <div class="location">
+    <h2>📍 Gülhane Kafe</h2>
+    <p>Gaziantep<br>Güncel adres bilgisi için işletme ile iletişime geçebilirsiniz.</p>
+    <a class="maps" href="https://www.google.com/maps/search/?api=1&query=Gülhane+Kafe+Gaziantep" target="_blank" rel="noopener">Google Maps'te Aç</a>
+  </div>
+</main>
+
+<footer>© 2026 <strong>Gülhane Kafe</strong><br>Dijital Menü</footer>
+
+<a class="whatsapp" href="https://wa.me/905059219493" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.1-.2-1.2-1.6-1.2-3s.8-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.5.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.4.1.1.1.7-.1 1.3z"/></svg>
+</a>
+<button id="top" aria-label="Yukarı çık" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<nav class="bottom-nav">
+  <a href="#home"><span>⌂</span>Ana Sayfa</a>
+  <a href="#sicak"><span>☕</span>Sıcak</a>
+  <a href="#soguk"><span>🥤</span>Soğuk</a>
+  <a href="#tatli"><span>🍰</span>Tatlılar</a>
+  <a href="#kahvalti"><span>🍳</span>Kahvaltı</a>
+  <a href="#hediye"><span>🎁</span>Hediye</a>
+</nav>
+
+<script>
+/* ============ MENÜ VERİSİ ============
+   Fotoğraf değiştirmek için ilgili ürünün "img" alanına yeni adres yazın.
+   img boş bırakılırsa veya yüklenmezse şık bir ikon gösterilir. */
+const U = id => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=700&q=80`;
+
+const MENU = [
+ {id:"sicak", icon:"☕", title:"Sıcak İçecekler", desc:"Kahveler, çaylar ve sıcak içecekler", items:[
+  ["Americano",120,"1495474472287-4d71bcdd2085"],
+  ["Cappuccino",150,"1534778101976-62847782c213"],
+  ["Espresso",100,"1510707577719-ae7c2fe9b1b7"],
+  ["Latte",130,"1572442388796-11668a67e53d"],
+  ["Mocha",130,"1578314675249-a6910f80cc4e"],
+  ["Dibek Kahvesi",120,"1498804103079-a6351b050096"],
+  ["Filtre Kahve",120,"1497636577773-f1231844b336"],
+  ["Menengiç Kahvesi",120,"1512568400610-62da28bc8a13"],
+  ["Osmanlı Kahvesi",120,"1509042239860-f550ce710b93"],
+  ["Türk Kahvesi",110,"1559056199-641a0ac8b55e"],
+  ["Nescafe",90,"1514432324607-a09d9b4aefdd"],
+  ["Çay",30,"1544787219-7f47ccb76574"],
+  ["Kuşburnu",100,"1597318181409-cf64d0fc6b7d"],
+  ["Nane Limon",100,"1556679343-c7306c1976bc"],
+  ["Papatya Çayı",100,"1576092768241-dec231879fc3"],
+  ["Salep",130,"1514432324607-a09d9b4aefdd"],
+  ["Sıcak Çikolata",100,"1542990253-0d0f5be5f0ed"],
+  ["Yeşil Çay",100,"1556679343-c7306c1976bc"],
+  ["Sınırsız Çay (Kişi Başı)",100,"1544787219-7f47ccb76574"]]},
+ {id:"soguk", icon:"🥤", title:"Soğuk İçecekler", desc:"Soğuk kahveler ve serinletici içecekler", items:[
+  ["Ice Americano",130,"1517701604599-bb29b565090c"],
+  ["Ice Latte",150,"1461023058943-07fcbe16d735"],
+  ["Ice Mocha",150,"1461988091159-192b6df7054f"],
+  ["Frappe",130,"1572490122747-3968b75cc699"],
+  ["Atom",170,""],
+  ["Churchill",100,""],
+  ["Enerji İçeceği",100,""],
+  ["Ice Tea",100,"1556679343-c7306c1976bc"],
+  ["Kola / Fanta / Gazoz",100,"1554866585-cd94860890b7"],
+  ["Kutu Meyve Suyu",100,"1527169402691-a3fb1b0f5e0a"],
+  ["Küçük Meyve Suyu",50,"1527169402691-a3fb1b0f5e0a"],
+  ["Limonata",130,"1544145945-f90425340c7e"],
+  ["Milkshake",150,"1579954115545-a95591f28bfc"],
+  ["Nane Limonata",150,"1544145945-f90425340c7e"],
+  ["Meyveli Soda",50,""],
+  ["Sade Soda",40,""],
+  ["Su",20,""]]},
+ {id:"tatli", icon:"🍰", title:"Pastalar & Tatlılar", desc:"Pasta ve tatlı seçenekleri", note:"İsteğe özel pasta yapılır.", items:[
+  ["Amored",210,"1578985545062-69928b1d9587"],
+  ["Belçika Çikolatalı",190,"1578985545062-69928b1d9587"],
+  ["Bella Vista",230,"1565958011703-44f9829ba187"],
+  ["Fıstık Rüyası",190,"1488477181946-6428a0291777"],
+  ["Fıstıklı Sufle",230,"1578985545062-69928b1d9587"],
+  ["Frambuaz Cup",200,"1488477181946-6428a0291777"],
+  ["Lotus Cheesecake",200,"1565958011703-44f9829ba187"],
+  ["Lotus Cup",230,"1488477181946-6428a0291777"],
+  ["Magnolia",100,"1488477181946-6428a0291777"],
+  ["Tiramisu",180,"1571877227200-a0d98ea607e9"]]},
+ {id:"kahvalti", icon:"🍳", title:"Kahvaltı & Aperatifler", desc:"Kahvaltı ve atıştırmalıklar", items:[
+  ["Aperatif Sepeti",200,"1528207776546-365bb710ee93"],
+  ["Kahvaltı Tabağı",300,"1525351484163-7529414344d8"],
+  ["Kaşarlı Tost",200,"1528207776546-365bb710ee93"],
+  ["Karışık Tost",170,"1528207776546-365bb710ee93"],
+  ["Omlet",100,"1482049016688-2d3e1b311543"],
+  ["Sandviç",100,"1528207776546-365bb710ee93"],
+  ["Serpme Kahvaltı",400,"1525351484163-7529414344d8"],
+  ["Sucuklu Tost",150,"1528207776546-365bb710ee93"]]},
+ {id:"hediye", icon:"🎁", title:"Hediye & Çikolatalar", desc:"Özel günler için hediye seçenekleri", items:[
+  ["Ayıcık",350,"1549007994-cb92caebd54b"],
+  ["Gül",150,"1549007994-cb92caebd54b"],
+  ["İkili Harf",500,"1549007994-cb92caebd54b"],
+  ["Tekli Harf",300,"1549007994-cb92caebd54b"],
+  ["Deri Kutu",1000,"1606312619070-d48b4c652a52"],
+  ["Diamond Beyaz",550,"1606312619070-d48b4c652a52"],
+  ["Flower",750,"1606312619070-d48b4c652a52"],
+  ["Kırmızı Diamond",550,"1606312619070-d48b4c652a52"],
+  ["Love Kırmızı",550,"1606312619070-d48b4c652a52"],
+  ["Pembe Kalp",120,"1549007994-cb92caebd54b"],
+  ["Saten",1200,"1606312619070-d48b4c652a52"],
+  ["Selection",450,"1549007994-cb92caebd54b"],
+  ["Kalp Kutu",550,"1606312619070-d48b4c652a52"],
+  ["Violet Kutu",300,"1606312619070-d48b4c652a52"],
+  ["Trufello Tırtıklı",550,"1549007994-cb92caebd54b"]]}
+];
+
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = n => n.toLocaleString('tr-TR') + ' ₺';
+
+const menuEl = document.getElementById('menu');
+const chipsEl = document.getElementById('chips');
+
+MENU.forEach(cat => {
+  chipsEl.insertAdjacentHTML('beforeend',
+    `<a class="chip" href="#${cat.id}" data-id="${cat.id}"><span>${cat.icon}</span>${esc(cat.title)}</a>`);
+
+  const cards = cat.items.map(([name, price, img]) => `
+    <article class="product" data-name="${esc(name.toLowerCase())}">
+      <div class="media">${img
+        ? `<img src="${img.startsWith('http') ? img : U(img)}" alt="${esc(name)}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=ph>${cat.icon}</div>'">`
+        : `<div class="ph">${cat.icon}</div>`}</div>
+      <div class="product-body">
+        <div class="product-name">${esc(name)}</div>
+        <span class="price">${fmt(price)}</span>
+      </div>
+    </article>`).join('');
+
+  menuEl.insertAdjacentHTML('beforeend', `
+    <section class="menu-section" id="${cat.id}">
+      <div class="section-head">
+        <div class="section-icon">${cat.icon}</div>
+        <div><h2>${esc(cat.title)}</h2><p>${esc(cat.desc)}</p></div>
+      </div>
+      <div class="products">${cards}</div>
+      ${cat.note ? `<div class="note">${esc(cat.note)}</div>` : ''}
+    </section>`);
+});
+
+/* ARAMA */
+const q = document.getElementById('q');
+q.addEventListener('input', () => {
+  const term = q.value.trim().toLocaleLowerCase('tr-TR');
+  let total = 0;
+  document.querySelectorAll('.menu-section').forEach(sec => {
+    let shown = 0;
+    sec.querySelectorAll('.product').forEach(p => {
+      const ok = !term || p.dataset.name.toLocaleLowerCase('tr-TR').includes(term);
+      p.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    sec.style.display = shown ? '' : 'none';
+    total += shown;
+  });
+  document.getElementById('empty').style.display = total ? 'none' : 'block';
+});
+
+/* AKTİF KATEGORİ */
+const chips = [...document.querySelectorAll('.chip')];
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      chips.forEach(c => c.classList.toggle('active', c.dataset.id === e.target.id));
+      const a = chips.find(c => c.dataset.id === e.target.id);
+      if (a) a.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+    }
+  });
+}, {rootMargin:'-30% 0px -65% 0px'});
+document.querySelectorAll('.menu-section').forEach(s => io.observe(s));
+
+/* YUKARI BUTONU */
+window.addEventListener('scroll', () => {
+  document.getElementById('top').style.display = window.scrollY > 500 ? 'block' : 'none';
+});
+</script>
+</body>
+</html>
